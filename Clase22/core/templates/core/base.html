@@ -28,26 +28,20 @@
             <a class="page-scroll" href="#page-top"></a>
           </li>
           <li>
-            <a href="#home" class="page-scroll">
-              <span class="menu-title">Home</span>
+            <a href="{% url 'index' %}" class="page-scroll">
+              <span class="menu-title">Inicio</span>
               <span class="dot"></span>
             </a>
           </li>
           <li>
-            <a href="#speakers" class="page-scroll">
-              <span class="menu-title">Speakers</span>
+            <a href="{% url 'agregar' %}" class="page-scroll">
+              <span class="menu-title">Crear</span>
               <span class="dot"></span>
             </a>
           </li>
           <li>
-            <a href="#tickets" class="page-scroll">
-              <span class="menu-title">Buy Tickets</span>
-              <span class="dot"></span>
-            </a>
-          </li>
-          <li>
-            <a href="#schedule" class="page-scroll">
-              <span class="menu-title">Schedule</span>
+            <a href="{% url 'mostrar' %}" class="page-scroll">
+              <span class="menu-title">Mostrar</span>
               <span class="dot"></span>
             </a>
           </li>
