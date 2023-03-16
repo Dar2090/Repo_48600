@@ -2,6 +2,23 @@
 {% extends 'core/base.html' %}
 
 {% block contenido_central %}
-MOSTRAR
+
+<table>
+    <th>id</th>
+    <th>Nombre</th>
+    <th>Camada</th>
+
+    {% for curso in cursos %}
+        <tr>
+            <td>{{ curso.id }}</td>
+            <td>{{ curso.nombre }}</td>
+            <td>{{ curso.camada }}</td>
+            <td><a href="{% url 'eliminar' curso.id %}">Eliminar</a></td>
+        </tr>
+    {% endfor %}
+</table>
+
+
+
 
 {% endblock %}
