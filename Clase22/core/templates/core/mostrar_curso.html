@@ -13,6 +13,7 @@
             <td>{{ curso.id }}</td>
             <td>{{ curso.nombre }}</td>
             <td>{{ curso.camada }}</td>
+            <td><a href="{% url 'editar' curso.id %}">Editar</a></td>
             <td><a href="{% url 'eliminar' curso.id %}">Eliminar</a></td>
         </tr>
     {% endfor %}

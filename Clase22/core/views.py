@@ -40,7 +40,11 @@ def editar(request, id_curso):
             curso.camada = data["n_camada"]
             curso.save()
             return render(request, 'core/index.html')
-    return render(request, 'core/editar_curso.html')
+    else:
+        # Mediante método GET
+        curso_form = CursoForm(initial={'name': curso.nombre, 'n_camada': curso.camada})
+        
+        return render(request, 'core/editar_curso.html', {'form': curso_form})
 
 def eliminar(request, id_curso):
 

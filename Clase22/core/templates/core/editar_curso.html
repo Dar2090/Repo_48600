@@ -2,6 +2,16 @@
 {% extends 'core/base.html' %}
 
 {% block contenido_central %}
-ESTE ES EL HTML INDEX
+
+<form action="" method="POST">
+    {% csrf_token %}
+<table>
+
+    {{ form.as_table }}
+
+</table>
+<input type="submit" value="Editar">
+
+</form>
 
 {% endblock %}
