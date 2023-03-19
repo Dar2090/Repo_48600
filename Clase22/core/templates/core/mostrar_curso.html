@@ -7,6 +7,11 @@
     <th>id</th>
     <th>Nombre</th>
     <th>Camada</th>
+    <th>Editar Func</th>
+    <th>Eliminar Func</th>
+    <th>Editar View</th>
+    <th>Eliminar View</th>
+    <th>Detalle View</th>
 
     {% for curso in cursos %}
         <tr>
@@ -15,6 +20,9 @@
             <td>{{ curso.camada }}</td>
             <td><a href="{% url 'editar' curso.id %}">Editar</a></td>
             <td><a href="{% url 'eliminar' curso.id %}">Eliminar</a></td>
+            <td><a href="{% url 'edit_view' curso.id %}">Editar_View</a></td>
+            <td><a href="{% url 'delete_view' curso.id %}">  Delete_View</a></td>
+            <td><a href="{% url 'detalle_view' curso.id %}">  Detalle_View</a></td>
         </tr>
     {% endfor %}
 </table>
