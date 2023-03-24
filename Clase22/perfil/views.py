@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
-from perfil.forms import UserRegisterForm
+from perfil.forms import UserRegisterForm, UserEditForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def login_request(request):
@@ -40,3 +41,31 @@ def register(request):
     
     form = UserRegisterForm()
     return render(request, "perfil/registro.html", {"form": form, "msj": msj})
+
+@login_required
+def perfil_edit(request):
+    
+    usuario = request.user
+
+    if request.method == "POST":
+
+        form = UserEditForm(request.POST)
+        if form.is_valid():
+            informacion = form.cleaned_data
+            usuario.email = informacion["email"]
+            usuario.password1 = informacion["password1"]
+            usuario.password2 = informacion["password2"]
+            usuario.save()
+
+            return render(request, "core/index.html")
+
+    else:
+        data_dict = {
+            'username': usuario.username,
+            'email': usuario.email,
+            'first_name': usuario.first_name,
+            'last_name': usuario.last_name,
+        }
+        form = UserEditForm(initial=data_dict)
+    return render(request, 'perfil/edit.html', {'form': form, 'usuario': usuario})
+

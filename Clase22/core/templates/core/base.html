@@ -27,6 +27,14 @@
           <li class="hidden active">
             <a class="page-scroll" href="#page-top"></a>
           </li>
+          {% if user.is_authenticated %}
+          <li>
+            <a href="{% url 'Editar_perfil' %}" class="page-scroll">
+              <span class="menu-title">Editar Perfil</span>
+              <span class="dot"></span>
+            </a>
+          </li>
+          {% else %}
           <li>
             <a href="{% url 'login' %}" class="page-scroll">
               <span class="menu-title">Login</span>
@@ -39,6 +47,7 @@
               <span class="dot"></span>
             </a>
           </li>
+          {% endif %}
           <li>
             <a href="{% url 'index' %}" class="page-scroll">
               <span class="menu-title">Inicio</span>
