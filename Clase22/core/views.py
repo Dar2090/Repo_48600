@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect
 from core.models import Curso
-from core.forms import CursoForm, UserRegisterForm
+from core.forms import CursoForm
 
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-# LOGIN
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
@@ -65,43 +64,6 @@ def eliminar(request, id_curso):
     curso.delete()
 
     return render(request, 'core/eliminar_curso.html', {"nombre_eliminado": name})
-
-def login_request(request):
-    msj = ""
-    if request.method == "POST":
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            usuario = form.cleaned_data.get('username')
-            contra = form.cleaned_data.get('password')
-            user = authenticate(username=usuario, password=contra)
-
-            if user:
-                login(request, user)
-                if request.GET.get('next'):
-                    return redirect(request.GET.get('next'))
-                else:
-                    return render(request, 'core/index.html')
-            else:
-                msj = "ERROR DE USUARIO"
-        else:
-            msj = "ERROR DE FORMULARIO"
-    
-    form = AuthenticationForm()
-    return render(request, "core/login.html", {"form": form, "msj": msj})
-
-def register(request):
-    msj = "CREANDO USUARIO"
-    if request.method == "POST":
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data["username"]
-            form.save()
-            return render(request, "core/index.html", {"msj": f"Bienvenido {username}"})
-        else:
-            msj = "ERROR CREANDO USUARIO"
-    
-    form = UserRegisterForm()
-    return render(request, "core/registro.html", {"form": form, "msj": msj})
 
 
 # VISTAS BASADAS EN CLASES
