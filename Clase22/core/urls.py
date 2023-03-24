@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
-
-from core.views import inicio, agregar, editar, mostrar, eliminar
+from django.contrib.auth.views import LogoutView
+from core.views import inicio, agregar, editar, mostrar, eliminar, login_request, register
 from core.views import CursoListView, CursoCreateView, CursoDeleteView, CursoDetailView, CursoUpdateView
 
 urlpatterns = [
@@ -14,6 +14,9 @@ urlpatterns = [
 
 # URL's de vistas basadas en Clase
 urlpatterns += [
+    path('login/', login_request, name="login"),
+    path('register/', register, name="registro"),
+    path('logout/', LogoutView.as_view(template_name='core/logout.html'), name="Logout"),
     path('mostrar_view/', CursoListView.as_view(), name='mostrar_view'),
     path('borrar/<pk>/', CursoDeleteView.as_view(), name='delete_view'),
     # ERROR

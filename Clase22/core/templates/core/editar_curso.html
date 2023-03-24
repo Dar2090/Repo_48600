@@ -3,15 +3,19 @@
 
 {% block contenido_central %}
 
-<form action="" method="POST">
-    {% csrf_token %}
-<table>
+<p>A esto lo ve cualquiera</p>
 
-    {{ form.as_table }}
+{% if user.is_authenticated %}
+    <form action="" method="POST">
+        {% csrf_token %}
+    <table>
 
-</table>
-<input type="submit" value="Editar">
+        {{ form.as_table }}
 
-</form>
+    </table>
+    <input type="submit" value="Editar">
+
+    </form>
+{% endif %}
 
 {% endblock %}

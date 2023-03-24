@@ -28,6 +28,18 @@
             <a class="page-scroll" href="#page-top"></a>
           </li>
           <li>
+            <a href="{% url 'login' %}" class="page-scroll">
+              <span class="menu-title">Login</span>
+              <span class="dot"></span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'registro' %}" class="page-scroll">
+              <span class="menu-title">Registrarse</span>
+              <span class="dot"></span>
+            </a>
+          </li>
+          <li>
             <a href="{% url 'index' %}" class="page-scroll">
               <span class="menu-title">Inicio</span>
               <span class="dot"></span>
@@ -67,8 +79,12 @@
             <h1>Attend the most awaited Conference of 2015</h1>
             <h3>to start you up with your business!</h3>
             <h4>20<sup>th</sup> to 22<sup>nd</sup>  October, 2015</h4>
-            <a href="#" class="btn btn-lg btn-red">Buy Tickets Now <span class="ti-arrow-right"></span></a>
-
+            <!-- <a href="#" class="btn btn-lg btn-red">Buy Tickets Now <span class="ti-arrow-right"></span></a> -->
+            {% if user.is_authenticated %}
+              <a href="{% url 'Logout' %}" class="btn btn-lg btn-red">Logout <span class="ti-arrow-right"></span></a>
+            {% else %}
+            <a href="{% url 'login' %}" class="btn btn-lg btn-red">Logueate<span class="ti-arrow-right"></span></a>
+            {% endif %}
           </div>
           <div class="col-md-5 hidden-xs">
             <img src="{% static 'core/img/rocket.png' %}" class="rocket animated bounce">
