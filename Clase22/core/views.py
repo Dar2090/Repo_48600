@@ -10,11 +10,18 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
+from perfil.models import Avatar
+
 # Create your views here.
 @login_required(redirect_field_name='next')
 def inicio(request):
-    
-    return render(request, 'core/index.html')
+    try:
+        avatar = Avatar.objects.get(user=request.user)
+        context = {'imagen': avatar.imagen.url}
+    except Avatar.DoesNotExist:
+        context = {}
+
+    return render(request, 'core/index.html', context)
 
 def agregar(request):
 

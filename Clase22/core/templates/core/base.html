@@ -27,26 +27,28 @@
           <li class="hidden active">
             <a class="page-scroll" href="#page-top"></a>
           </li>
-          {% if user.is_authenticated %}
-          <li>
-            <a href="{% url 'Editar_perfil' %}" class="page-scroll">
-              <span class="menu-title">Editar Perfil</span>
-              <span class="dot"></span>
-            </a>
-          </li>
+          {% if request.user.is_authenticated %}
+            <li>
+              <a href="{% url 'Editar_perfil' %}" class="page-scroll">
+                <span class="menu-title">Editar Perfil</span>
+                <img src="{{ user.avatar.imagen.url }}" height="40px" alt="">
+                <!-- <img height="40px" src="{{ imagen }}" alt=""> -->
+                <span class="dot"></span>
+              </a>
+            </li>
           {% else %}
-          <li>
-            <a href="{% url 'login' %}" class="page-scroll">
-              <span class="menu-title">Login</span>
-              <span class="dot"></span>
-            </a>
-          </li>
-          <li>
-            <a href="{% url 'registro' %}" class="page-scroll">
-              <span class="menu-title">Registrarse</span>
-              <span class="dot"></span>
-            </a>
-          </li>
+            <li>
+              <a href="{% url 'login' %}" class="page-scroll">
+                <span class="menu-title">Login</span>
+                <span class="dot"></span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'registro' %}" class="page-scroll">
+                <span class="menu-title">Registrarse</span>
+                <span class="dot"></span>
+              </a>
+            </li>
           {% endif %}
           <li>
             <a href="{% url 'index' %}" class="page-scroll">
@@ -142,6 +144,16 @@
               </div>
             </form>
           </div>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown button
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </div>
           <div class="col-md-4 col-md-offset-1 content-ct">
             <h3><span class="ti-twitter"></span> Twitter Feed</h3>
             <p>Lorem <a href="#">#Ipsum</a> is a dummy text used as a text filler in designs. This is just a dummy text. via <a href="#">@designerdada</a> </p>
@@ -163,6 +175,7 @@
             </ul>
           </div>
         </div>
+
       </div>
       <!-- End: Footer -->
 
