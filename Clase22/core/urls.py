@@ -6,10 +6,10 @@ from core.views import CursoListView, CursoCreateView, CursoDeleteView, CursoDet
 
 urlpatterns = [
     path('', inicio, name="index"),
-    path('agregar/', agregar, name="agregar"),
-    path('editar/<int:id_curso>/', editar, name="editar"),
-    path('mostrar/', mostrar, name="mostrar"),
-    path('eliminar/<int:id_curso>/', eliminar, name="eliminar"),
+    path('core/agregar/', agregar, name="agregar"),
+    path('core/editar/<int:id_curso>/', editar, name="editar"),
+    path('core/mostrar/', mostrar, name="mostrar"),
+    path('core/eliminar/<int:id_curso>/', eliminar, name="eliminar"),
 ]
 
 # URL's de vistas basadas en Clase
