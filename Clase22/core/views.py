@@ -12,9 +12,15 @@ from django.contrib.auth.decorators import login_required
 
 from perfil.models import Avatar
 
+from django.core.cache import cache
+
 # Create your views here.
 @login_required(redirect_field_name='next')
 def inicio(request):
+    total = cache.get("contador", 0)
+    total += 1
+    cache.set("contador", total)
+    print(f"\n\nCACHE:\n{cache.get('contador')}\n\n")
     try:
         avatar = Avatar.objects.get(user=request.user)
         context = {'imagen': avatar.imagen.url}
@@ -24,7 +30,7 @@ def inicio(request):
     return render(request, 'core/index.html', context)
 
 def agregar(request):
-
+    
     if request.method == "POST":
 
         curso_form = CursoForm(request.POST)
@@ -41,7 +47,7 @@ def agregar(request):
 
 @login_required(redirect_field_name='next')
 def mostrar(request):
-
+    
     cursosx = Curso.objects.all()
 
     return render(request, 'core/mostrar_curso.html', {"cursos": cursosx})
@@ -79,12 +85,12 @@ class CursoListView(LoginRequiredMixin, ListView):
     template_name = 'core/mostrar_view.html'
 
     def get(self, request, *args, **kwargs):
-        print("\n\n\n\nMI PRINT\n\n\n\n")
         return super().get(request, *args, **kwargs)
     
 class CursoDetailView(DetailView):    
     model = Curso
     template_name = 'core/curso_detalle_view.html'
+
 
 class CursoDeleteView(DeleteView):
     model = Curso
@@ -92,11 +98,13 @@ class CursoDeleteView(DeleteView):
     template_name = 'core/curso_confirm_del_view.html'
     success_url = '/core/mostrar_view/'
 
+
 class CursoCreateView(CreateView):
     model = Curso
     template_name = 'core/curso_form_view.html'
     success_url = '/core/mostrar_view/'
     fields = ['nombre', 'camada']
+
 
 class CursoUpdateView(UpdateView):
     model = Curso

@@ -31,7 +31,10 @@
             <li>
               <a href="{% url 'Editar_perfil' %}" class="page-scroll">
                 <span class="menu-title">Editar Perfil</span>
-                <img src="{{ user.avatar.imagen.url }}" height="40px" alt="">
+                {% if request.user.avatar.imagen %}
+                <img src="{{ request.user.avatar.imagen.url }}" height="40px" alt="">
+                {% endif %}
+                <a href="{% url 'agregar_avatar' %}"><button>Editar Avatar</button></a>
                 <!-- <img height="40px" src="{{ imagen }}" alt=""> -->
                 <span class="dot"></span>
               </a>

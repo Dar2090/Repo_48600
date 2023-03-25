@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
-from perfil.forms import UserRegisterForm, UserEditForm
+from django.contrib.auth.models import User
+from perfil.forms import UserRegisterForm, UserEditForm, AvatarForm
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+from perfil.utilities.user_profile import clean_avatar_record_without_user
+
 # Create your views here.
 
 def login_request(request):
@@ -69,3 +73,19 @@ def perfil_edit(request):
         form = UserEditForm(initial=data_dict)
     return render(request, 'perfil/edit.html', {'form': form, 'usuario': usuario})
 
+@login_required
+def avatar_form(request):
+    msj = "CARGANDO AVATAR"
+    if request.method == "POST":
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            avatar = form.save()
+            avatar.user = request.user
+            avatar.save()
+            clean_avatar_record_without_user()
+            return redirect(reverse('index'))
+        else:
+            msj = "ERROR CREANDO AVATAR, INVALIDO"
+    
+    form = AvatarForm()
+    return render(request, "perfil/avatar_form.html", {"form": form, "msj": msj})

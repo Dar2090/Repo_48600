@@ -2,4 +2,4 @@
 *.pyc
 Pipfile
 Pipfile.lock
-/media/**
+avatares/
